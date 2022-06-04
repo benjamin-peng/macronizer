@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState, useEffect } from 'react';
+import Textfield from './Textfield';
+import MacronizeButton from './MacronizeButton';
 
 function App() {
   const [word, setWord] = useState('dico');
@@ -20,7 +22,7 @@ function App() {
       //console.log(page.getElementsByClassName('Latn headword'));
       for (let i = 0; i < page.getElementsByClassName('Latn headword').length; i++) {
         if (page.getElementsByClassName('Latn headword')[i].lang == 'la') {
-          console.log('asdf');
+          console.log(page.getElementsByClassName('Latn headword')[i].innerText);
         }
       }
     })
@@ -31,7 +33,8 @@ function App() {
   return (
     <div className="App">
       <p>Macronizer</p>
-      <button onClick={macronize}>macronize</button>
+      <Textfield></Textfield>
+      <MacronizeButton macronize={macronize}></MacronizeButton>
     </div>
   );
 }
