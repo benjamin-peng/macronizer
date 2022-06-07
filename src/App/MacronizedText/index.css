@@ -1,0 +1,9 @@
+p {
+    margin: 0;
+}
+
+.macronized {
+    background-color: white;
+    border: 2px solid rgb(146, 146, 146);
+    text-align: justify;
+}

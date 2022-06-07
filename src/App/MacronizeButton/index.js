@@ -1,6 +1,6 @@
 const MacronizeButton = ({macronize}) => {
     return (  
-        <div className="MacronizeButton">
+        <div className="macronize-button">
             <button onClick={macronize}>macronize</button>
         </div>
     );
