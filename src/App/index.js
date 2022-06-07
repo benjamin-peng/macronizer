@@ -11,7 +11,7 @@ function App() {
   const [output, setOutput] = useState(''); 
   var temp = [];
 
-  const macronizeSingle = async (inp) => {
+  const macronizeRecurse = async (inp) => {
     if (inp.length > 0) {
       const endpoint = 'https://en.wiktionary.org/w/api.php?';
       const params = 'action=query' + '&prop=extracts&titles=' + inp[inp.length - 1] + '&format=json&origin=*';
@@ -40,7 +40,7 @@ function App() {
         }
         temp.push(out);
         inp.pop();
-        macronizeSingle(inp);
+        macronizeRecurse(inp);
       })
       .catch((err) => {
         console.log(err);
@@ -51,15 +51,11 @@ function App() {
     }
   };
 
-  const macronizeMultiple = (inputArray) => {
-    //for ()
-  }
-
   const macronize = async () => {
     setOutput('');
     temp = [];
     const inputArray = input.split(" ");
-    macronizeSingle(inputArray);
+    macronizeRecurse(inputArray);
   }
 
   return (
