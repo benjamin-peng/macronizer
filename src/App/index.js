@@ -12,7 +12,20 @@ function App() {
   var temp = [];
 
   const macronizeRecurse = async (inp) => {
-    if (inp.length > 0) {
+    var enclitic = '';
+    if (inp.length > 0) { 
+      //check for and remove common enclitics
+      if (inp[inp.length - 1].endsWith('que')) {
+        inp[inp.length - 1] = inp[inp.length - 1].substring(0, inp[inp.length - 1].length - 3);
+        enclitic = 'que';
+      } else if (inp[inp.length - 1].endsWith('ve')) {
+        inp[inp.length - 1] = inp[inp.length - 1].substring(0, inp[inp.length - 1].length - 2);
+        enclitic = 've';
+      } else if (inp[inp.length - 1].endsWith('ne')) {
+        inp[inp.length - 1] = inp[inp.length - 1].substring(0, inp[inp.length - 1].length - 2);
+        enclitic = 'ne';
+      }
+      
       const endpoint = 'https://en.wiktionary.org/w/api.php?';
       const params = 'action=query' + '&prop=extracts&titles=' + inp[inp.length - 1] + '&format=json&origin=*';
       var out = '';
@@ -38,7 +51,7 @@ function App() {
         else if (macronizations.length > 0) { //TODO:: multiple possibilities displayed for single word
           out = macronizations[0];
         }
-        temp.push(out);
+        temp.push(out + enclitic); //reattach enclitic
         inp.pop();
         macronizeRecurse(inp);
       })
