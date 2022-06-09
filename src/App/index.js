@@ -9,6 +9,8 @@ function App() {
   //const [word, setWord] = useState('dico');
   const [input, setInput] = useState(''); 
   const [output, setOutput] = useState(''); 
+  const [outList, setOutList] = useState([]); 
+
   var temp = [];
 
   const macronizeRecurse = async (inp) => {
@@ -59,6 +61,7 @@ function App() {
         console.log(err);
       });
     } else {
+      setOutList(temp);
       temp.reverse();
       setOutput(temp.join(' '));
     }
@@ -79,7 +82,7 @@ function App() {
           <Textfield setInput={setInput}></Textfield>
         </div>
         <div className="horizontal">
-          <MacronizedText text={output}></MacronizedText>
+          <MacronizedText text={output} outList={outList}></MacronizedText>
         </div>
       </div>
       <MacronizeButton macronize={macronize}></MacronizeButton>
