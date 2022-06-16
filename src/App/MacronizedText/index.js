@@ -15,9 +15,6 @@ const MacronizedText = ({ outList }) => {
                         </React.Fragment>
                     );
                 })}
-                {/*
-                <p id="output">{text}</p>
-                */}
             </div>
         </div>
     );

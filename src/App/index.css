@@ -48,6 +48,13 @@ p {
   padding: 20px;
   display: flex;
   justify-content: center;
+  transition: filter 300ms;
+}
+.macronize-button:hover {
+  filter: brightness(1.2);
+}
+.macronize-button button {
+  background-color: #ececec;
 }
 .macronized-word {
   height: 16px;

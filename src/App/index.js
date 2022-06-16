@@ -49,7 +49,7 @@ function App() {
             macronizations.push(latinElements[i].innerText);
           }
         }
-        macronizations = Array.from(new Set(macronizations)); //make unique
+        macronizations = Array.from(new Set(macronizations)); //remove duplicates
         if (macronizations.length === 0) {
           out = [inp[inp.length - 1]];
         }
@@ -84,6 +84,7 @@ function App() {
     macronizeRecurse(inputArray);
   }
 
+  //TODO:: implement "copy to clipboard" button
   return (
     <div className="App">
       <Header></Header>

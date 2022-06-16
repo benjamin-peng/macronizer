@@ -8,7 +8,7 @@ const MacronizedWord = ({wordList}) => {
     useEffect(() => {
         if (wordList.length > 1) setColor('#cffaf2');
         else setColor('white');
-    }, []);
+    }, [wordList]);
 
     const loopIdx = () => {
         if (wordIdx + 1 == wordList.length) {
