@@ -57,9 +57,6 @@ p {
   padding: 0px;
   margin: 0px;
 }
-.macronized-word:hover {
-  background-color: beige;
-}
 .smalltext {
   font-size: 11px;
 }

@@ -2,16 +2,16 @@ import React, { Fragment } from 'react';
 import './index.css';
 import MacronizedWord from '../MacronizedWord';
 
-const MacronizedText = ({ text, outList }) => {
-    console.log(outList);
+const MacronizedText = ({ outList }) => {
+    //console.log(outList);
     return (
         <div className="vertical">
             <p id="label2" className="label">output</p>
             <div className="macronized">
-                {outList.map((word) => {
+                {outList.map((wordList) => {
                     return (
                         <React.Fragment>
-                            <MacronizedWord word={word}></MacronizedWord>
+                            <MacronizedWord wordList={wordList}></MacronizedWord>
                         </React.Fragment>
                     );
                 })}

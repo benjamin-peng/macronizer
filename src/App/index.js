@@ -12,10 +12,12 @@ function App() {
   const [outList, setOutList] = useState([]); 
 
   var temp = [];
+  const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
 
   const macronizeRecurse = async (inp) => {
     var enclitic = '';
     if (inp.length > 0) { 
+      console.log(inp[inp.length - 1]);
       //check for and remove common enclitics
       if (inp[inp.length - 1].endsWith('que')) {
         inp[inp.length - 1] = inp[inp.length - 1].substring(0, inp[inp.length - 1].length - 3);
@@ -30,7 +32,7 @@ function App() {
       
       const endpoint = 'https://en.wiktionary.org/w/api.php?';
       const params = 'action=query' + '&prop=extracts&titles=' + inp[inp.length - 1] + '&format=json&origin=*';
-      var out = '';
+      var out = [];
       fetch(endpoint + params, {
         method: 'GET'
       })
@@ -47,13 +49,17 @@ function App() {
             macronizations.push(latinElements[i].innerText);
           }
         }
+        macronizations = Array.from(new Set(macronizations)); //make unique
         if (macronizations.length === 0) {
-          out = inp[inp.length - 1];
+          out = [inp[inp.length - 1]];
         }
         else if (macronizations.length > 0) { //TODO:: multiple possibilities displayed for single word
-          out = macronizations[0];
+          for (var i = 0; i < macronizations.length; i++) {
+            out.push(macronizations[i] + enclitic); 
+          }
+          //out = macronizations[0];
         }
-        temp.push(out + enclitic); //reattach enclitic
+        temp.push(out); //reattach enclitic
         inp.pop();
         macronizeRecurse(inp);
       })
@@ -61,9 +67,8 @@ function App() {
         console.log(err);
       });
     } else {
-      setOutList(temp);
       temp.reverse();
-      setOutput(temp.join(' '));
+      setOutList(temp);
     }
   };
 
@@ -71,6 +76,11 @@ function App() {
     setOutput('');
     temp = [];
     const inputArray = input.split(" ");
+    //remove whitespace and punctuation
+    for (var i = 0; i < inputArray.length; i++) {
+      inputArray[i] = inputArray[i].replace(regex, '');
+      if (inputArray[i].trim().length === 0) inputArray.splice(i, 1); 
+    }
     macronizeRecurse(inputArray);
   }
 
