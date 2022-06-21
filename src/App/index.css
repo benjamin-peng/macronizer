@@ -57,6 +57,7 @@ p {
   background-color: #ececec;
 }
 .macronized-word {
+  position: relative;
   height: 16px;
   margin-right: 3px;
 }
@@ -66,6 +67,16 @@ p {
 }
 .smalltext {
   font-size: 11px;
+}
+.dropup {
+  width: 100px;
+  height: 200px;
+  border: 1px solid rgb(146, 146, 146);
+  position: absolute;
+  top: 20px;
+  left: calc(50% - 50px);
+  z-index: 1;
+  background-color: bisque;
 }
 #label1 {
   margin-right: 20px;
