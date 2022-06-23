@@ -1,10 +1,18 @@
 import React, { Fragment, useEffect } from 'react';
 import './index.css';
 import MacronizedWord from '../MacronizedWord';
+import CopyButton from '../CopyButton';
 
 const MacronizedText = ({ outList }) => {
 
-    //console.log(outList);
+    const copy = () => {
+        var text = [];
+        for (var i = 0; i < outList.length; i++) {
+            text.push(outList[i][0]);
+        }
+        navigator.clipboard.writeText(text.join(' '));
+    }
+
     return (
         <div className="vertical">
             <p id="label2" className="label">output</p>
@@ -16,6 +24,7 @@ const MacronizedText = ({ outList }) => {
                         </React.Fragment>
                     );
                 })}
+                <CopyButton copy={copy}></CopyButton>
             </div>
         </div>
     );
