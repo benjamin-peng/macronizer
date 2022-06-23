@@ -3,6 +3,12 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
+a {
+  color: rgb(20, 126, 158); 
+}
+a:hover {
+  filter: brightness(1.5);
+}
 body {
   background-color: #f7f7f7;
 }
@@ -101,4 +107,5 @@ p {
   margin-top: 3px;
   font-size: 12px;
   background-color: white;
+  padding-bottom: 2px;
 }
