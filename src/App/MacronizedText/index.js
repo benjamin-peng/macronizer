@@ -1,8 +1,9 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import './index.css';
 import MacronizedWord from '../MacronizedWord';
 
 const MacronizedText = ({ outList }) => {
+
     //console.log(outList);
     return (
         <div className="vertical">

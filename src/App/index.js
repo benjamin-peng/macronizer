@@ -4,6 +4,7 @@ import Textfield from './Textfield';
 import MacronizeButton from './MacronizeButton';
 import MacronizedText from './MacronizedText';
 import Header from './Header';
+import { Markup } from 'interweave';
 
 function App() {
   //const [word, setWord] = useState('dico');
@@ -17,7 +18,7 @@ function App() {
   const macronizeRecurse = async (inp) => {
     var enclitic = '';
     if (inp.length > 0) { 
-      console.log(inp[inp.length - 1]);
+      //console.log(inp[inp.length - 1]);
       //check for and remove common enclitics
       if (inp[inp.length - 1].endsWith('que')) {
         inp[inp.length - 1] = inp[inp.length - 1].substring(0, inp[inp.length - 1].length - 3);
@@ -42,6 +43,7 @@ function App() {
       .then((data) => {
         var page = document.createElement('html');
         page.innerHTML = data.query.pages[Object.keys(data.query.pages)].extract;
+        //console.log(page.innerHTML);
         var latinElements = page.getElementsByClassName('Latn headword');
         var macronizations = [];
         for (let i = 0; i < latinElements.length; i++) {
@@ -84,7 +86,7 @@ function App() {
     macronizeRecurse(inputArray);
   }
 
-  //TODO:: implement "copy to clipboard" button
+    //TODO:: implement "copy to clipboard" button
   return (
     <div className="App">
       <Header></Header>

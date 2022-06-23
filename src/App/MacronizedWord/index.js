@@ -5,11 +5,43 @@ const MacronizedWord = ({wordList}) => {
 
     const [color, setColor] = useState('white'); 
     const [wordIdx, setWordIdx] = useState(0);
-    const [hover, setHover] = useState(false); 
+    const [hover, setHover] = useState(false);
+    const [valid, setValid] = useState(false); 
+
+    const demacronize = (word) => {
+        return word.replace('ā', 'a').replace('ē', 'e').replace('ū', 'u').replace('ī', 'i').replace('ō', 'o');
+    };
+
+    const endpoint = 'https://en.wiktionary.org/w/api.php?';
+    const params = 'action=query' + '&prop=extracts&titles=' + demacronize(wordList[0]) + '&format=json&origin=*';
 
     useEffect(() => {
         if (wordList.length > 1) setColor('#cffaf2');
         else setColor('white');
+    }, [wordList]);
+
+    useEffect(() => {
+        setValid(false);
+        fetch(endpoint + params, {
+            method: 'GET'
+          })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            var page = document.createElement('html');
+            page.innerHTML = data.query.pages[Object.keys(data.query.pages)].extract;
+            var latinElements = page.getElementsByClassName('Latn headword');
+            for (let i = 0; i < latinElements.length; i++) {
+                if (latinElements[i].lang == 'la') {
+                    setValid(true);
+                    break;
+                }
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
     }, [wordList]);
 
     const loopIdx = () => {
@@ -31,7 +63,7 @@ const MacronizedWord = ({wordList}) => {
             else setColor('#cffaf2');
             setHover(false);
             }}>
-            {hover && <Dropup></Dropup>}
+            {hover && valid && <Dropup word={wordList[0]} demacronize={demacronize}></Dropup>}
             <p id="output">{wordList[wordIdx]}</p>
         </div>
     );
