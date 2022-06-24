@@ -1,5 +1,5 @@
 import './index.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Textfield from './Textfield';
 import MacronizeButton from './MacronizeButton';
 import MacronizedText from './MacronizedText';
@@ -7,13 +7,22 @@ import Header from './Header';
 import { Markup } from 'interweave';
 
 function App() {
-  //const [word, setWord] = useState('dico');
   const [input, setInput] = useState(''); 
   const [output, setOutput] = useState(''); 
   const [outList, setOutList] = useState([]); 
+  const [copyList, setCopyList] = useState([]);
 
+  var currList = [];
   var temp = [];
   const regex = /[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g;
+
+  useEffect(() => {
+    var tempCopy = [];
+    for (var i = 0; i < outList.length; i++) {
+        tempCopy.push(outList[i][0]);
+    }
+    setCopyList(tempCopy);
+  }, [outList]);
 
   const macronizeRecurse = async (inp) => {
     var enclitic = '';
@@ -43,7 +52,6 @@ function App() {
       .then((data) => {
         var page = document.createElement('html');
         page.innerHTML = data.query.pages[Object.keys(data.query.pages)].extract;
-        //console.log(page.innerHTML);
         var latinElements = page.getElementsByClassName('Latn headword');
         var macronizations = [];
         for (let i = 0; i < latinElements.length; i++) {
@@ -59,7 +67,6 @@ function App() {
           for (var i = 0; i < macronizations.length; i++) {
             out.push(macronizations[i] + enclitic); 
           }
-          //out = macronizations[0];
         }
         temp.push(out); //reattach enclitic
         inp.pop();
@@ -95,7 +102,7 @@ function App() {
           <Textfield setInput={setInput}></Textfield>
         </div>
         <div className="horizontal">
-          <MacronizedText text={output} outList={outList}></MacronizedText>
+          <MacronizedText key={copyList} text={output} outList={outList} copyList={copyList} setCopyList={setCopyList}></MacronizedText>
         </div>
       </div>
       <MacronizeButton macronize={macronize}></MacronizeButton>

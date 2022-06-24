@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Dropup from '../Dropup';
 
-const MacronizedWord = ({wordList}) => {
+const MacronizedWord = ({myKey, wordList, copyList, setCopyList}) => {
 
     const [color, setColor] = useState('white'); 
     const [wordIdx, setWordIdx] = useState(0);
@@ -43,6 +43,12 @@ const MacronizedWord = ({wordList}) => {
             console.log(err);
           });
     }, [wordList]);
+
+    useEffect(() => {
+        var tempCopyList = copyList;
+        tempCopyList[myKey] = wordList[wordIdx];
+        setCopyList(tempCopyList);
+    }, [wordIdx]);
 
     const loopIdx = () => {
         if (wordIdx + 1 == wordList.length) {
