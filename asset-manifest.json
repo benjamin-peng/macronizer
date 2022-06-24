@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/macronizer/static/css/main.bc92e1b4.css",
+    "main.css": "/macronizer/static/css/main.7ab7dc84.css",
     "main.js": "/macronizer/static/js/main.6e69ab30.js",
     "static/js/787.3db151e9.chunk.js": "/macronizer/static/js/787.3db151e9.chunk.js",
     "static/media/copy.svg": "/macronizer/static/media/copy.e97ec2c6531a083578c5.svg",
     "index.html": "/macronizer/index.html",
-    "main.bc92e1b4.css.map": "/macronizer/static/css/main.bc92e1b4.css.map",
+    "main.7ab7dc84.css.map": "/macronizer/static/css/main.7ab7dc84.css.map",
     "main.6e69ab30.js.map": "/macronizer/static/js/main.6e69ab30.js.map",
     "787.3db151e9.chunk.js.map": "/macronizer/static/js/787.3db151e9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.bc92e1b4.css",
+    "static/css/main.7ab7dc84.css",
     "static/js/main.6e69ab30.js"
   ]
 }
