@@ -89,6 +89,7 @@ function App() {
     for (var i = 0; i < inputArray.length; i++) {
       inputArray[i] = inputArray[i].replace(regex, '');
       if (inputArray[i].trim().length === 0) inputArray.splice(i, 1); 
+      inputArray[i] = inputArray[i].toLowerCase();
     }
     macronizeRecurse(inputArray);
   }
