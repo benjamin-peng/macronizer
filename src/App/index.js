@@ -4,7 +4,7 @@ import Textfield from './Textfield';
 import MacronizeButton from './MacronizeButton';
 import MacronizedText from './MacronizedText';
 import Header from './Header';
-import { Markup } from 'interweave';
+import BottomText from './BottomText';
 
 function App() {
   const [input, setInput] = useState(''); 
@@ -96,16 +96,15 @@ function App() {
     //TODO:: implement "copy to clipboard" button
   return (
     <div className="App">
-      <Header></Header>
-      <div className="align-container">
-        <div className="horizontal">
-          <Textfield setInput={setInput}></Textfield>
+      <div className="column-align">
+        <Header></Header>
+        <div className="align-container">
+            <Textfield setInput={setInput}></Textfield>
+            <MacronizedText key={copyList} text={output} outList={outList} copyList={copyList} setCopyList={setCopyList}></MacronizedText>
         </div>
-        <div className="horizontal">
-          <MacronizedText key={copyList} text={output} outList={outList} copyList={copyList} setCopyList={setCopyList}></MacronizedText>
-        </div>
+        <MacronizeButton macronize={macronize}></MacronizeButton>
+        <BottomText></BottomText>
       </div>
-      <MacronizeButton macronize={macronize}></MacronizeButton>
     </div>
   );
 }
