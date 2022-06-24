@@ -108,6 +108,9 @@ p {
 .copy-button:hover {
   cursor: pointer;
 }
+.bottom-text{
+  margin-bottom: 70px;
+}
 .bottom-text > h3 {
   margin: 0px 0px 5px 0px;
 }
